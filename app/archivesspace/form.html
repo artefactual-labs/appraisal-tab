@@ -1,7 +1,9 @@
 <form class="resource-form">
-  Title: <input type="text" ng-model="form.title">
-  Level of description: <select ng-model="form.level"
+  <label>Foo:</label> <input type="text" ng-model="form.title">
+  <label>Level of description:</label> <select ng-model="form.level"
                                 ng-options="level for level in form.levels">
+  <label>Dates:</label> <input type="text" ng-model="form.dates">
+  <label>Note:</label> <input type="text" ng-model="form.note">
   </select>
   <input type="submit" ng-click="form.ok()" value="Save" />
   <input type="submit" ng-click="form.cancel()" value="Cancel" />
