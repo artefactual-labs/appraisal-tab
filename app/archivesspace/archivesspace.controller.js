@@ -24,7 +24,9 @@
               return node.dates;
             },
             note: function() {
-              return node.note;
+              if (node.notes[0]) {
+                return node.notes[0].content;
+              }
             },
           },
         });
@@ -38,7 +40,10 @@
           node.title = result.title;
           node.levelOfDescription = result.level;
           node.dates = result.dates;
-          node.note = result.note;
+          node.note = {
+            type: 'off',
+            content: result.note,
+          };
           // Any node with pending requests will be marked as non-editable
           node.request_pending = true;
 
