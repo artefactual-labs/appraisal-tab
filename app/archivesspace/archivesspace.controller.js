@@ -254,6 +254,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
         var on_success = response => {
           result.id = response.id;
           result.parent = node;
+          result.type = 'resource_component';
           append_child(node, result);
         };
 
