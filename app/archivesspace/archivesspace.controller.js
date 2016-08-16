@@ -288,6 +288,8 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
     form.result.then(result => {
       var on_success = response => {
         result.id = response.component_id;
+        result.path = response.component_path;
+        result.resourceid = node.id;
         result.type = 'digital_object';
         append_child(node, result);
       };
