@@ -47,6 +47,7 @@ directive('treeDroppable', ['$parse', function($parse) {
         // with the way we're rendering element names. The "pointer" option checks
         // for mouse cursor position instead, which is more reliable for us.
         tolerance: 'pointer',
+        hoverClass: 'expecting'
       });
     },
   };

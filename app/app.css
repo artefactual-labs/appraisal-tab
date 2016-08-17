@@ -84,3 +84,7 @@ fieldset {
   /* Navbar is 40px, so this gives a space of 15px in between. */
   margin-top: 55px;
 }
+
+.ui-droppable.expecting {
+  background-color: rgba(0, 0, 0, 0.1);
+}
