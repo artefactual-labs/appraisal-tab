@@ -16,7 +16,11 @@ directive('treeDraggable', function() {
         containment: false,
         cursor: 'move',
         helper: 'clone',
-        revert: 'invalid'
+        revert: 'invalid',
+        cursorAt: {
+          top: -5,
+          left: -5
+        }
       });
     },
   };
