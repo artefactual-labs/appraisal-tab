@@ -88,3 +88,9 @@ fieldset {
 .ui-droppable.expecting {
   background-color: rgba(0, 0, 0, 0.1);
 }
+
+.ui-draggable-dragging {
+  padding: 2px;
+  border: 1px solid #f5f5f5;
+  background-color: #fff;
+}
