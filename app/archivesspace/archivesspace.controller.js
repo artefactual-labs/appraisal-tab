@@ -609,7 +609,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
     };
 
     node.request_pending = true;
-    ArchivesSpace.start_sip(node.id).then(on_success, on_failure);
+    ArchivesSpace.start_sip(node).then(on_success, on_failure);
   };
 }]).
 
