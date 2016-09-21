@@ -187,10 +187,10 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
           return '';
         },
         start_date: () => {
-          return new Date();
+          return '';
         },
         end_date: () => {
-          return new Date();
+          return '';
         },
         date_expression: () => {
           return '';
