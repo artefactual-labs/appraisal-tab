@@ -22,12 +22,12 @@
   <div class="row" ng-if="form.start_date !== false &amp;&amp; form.end_date !== false">
   <div class="col-md-6">
     <label>Dates:</label>
-    <input type="text" class="form-control" uib-datepicker-popup ng-model="form.start_date" is-open="form.status.start_date_opened" ng-required="true" close-text="Close"/>
+    <input type="text" class="form-control" uib-datepicker-popup ng-model="form.start_date" is-open="form.status.start_date_opened" close-text="Close"/>
     <button type="button" class="btn btn-default" ng-click="form.open_datepicker('start', $event)"><i class="fa fa-calendar"></i></button>
   </div>
   <div class="col-md-6">
     <label>Dates:</label>
-    <input type="text" class="form-control" uib-datepicker-popup ng-model="form.end_date" is-open="form.status.end_date_opened" ng-required="false" close-text="Close"/>
+    <input type="text" class="form-control" uib-datepicker-popup ng-model="form.end_date" is-open="form.status.end_date_opened" close-text="Close"/>
     <button type="button" class="btn btn-default" ng-click="form.open_datepicker('end', $event)"><i class="fa fa-calendar"></i></button>
     <label>Expression:</label> <input type="text" ng-model="form.date_expression" ng-required="!form.title">
   </div>
