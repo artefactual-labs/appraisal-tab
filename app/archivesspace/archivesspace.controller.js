@@ -585,12 +585,4 @@ controller('ArchivesSpaceEditController', ['$uibModalInstance', 'levels', 'level
   vm.cancel = function() {
     $uibModalInstance.dismiss('cancel');
   };
-  vm.open_datepicker = (picker, $event) => {
-    var prop = picker + '_date_opened';
-    this.status[prop] = true;
-  };
-  vm.status = {
-    start_date_opened: false,
-    end_date_opened: false,
-  };
 }]);

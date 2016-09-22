@@ -57,7 +57,7 @@ treecontrol>ul>li {
   padding-left: 0px;
 }
 
-.form-control {
+.facet-box .form-control {
   width: auto;
   display: inline;
 }
