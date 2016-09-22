@@ -57,10 +57,8 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
 
     if (form.start_date) {
       copy.start_date = form.start_date.toISOString().slice(0, 10);
-      copy.dates = copy.start_date + '-';
       if (form.end_date) {
         copy.end_date = form.end_date.toISOString().slice(0, 10);
-        copy.dates = copy.dates + copy.end_date;
       }
     }
 
