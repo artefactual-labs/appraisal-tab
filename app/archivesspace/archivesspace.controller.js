@@ -56,13 +56,6 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
     }
     delete copy.accessrestrict_note;
 
-    if (form.start_date) {
-      copy.start_date = form.start_date.toISOString().slice(0, 10);
-      if (form.end_date) {
-        copy.end_date = form.end_date.toISOString().slice(0, 10);
-      }
-    }
-
     return copy;
   };
 
