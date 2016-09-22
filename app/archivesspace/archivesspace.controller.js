@@ -1,4 +1,5 @@
 import angular from 'angular';
+import moment from 'moment';
 import '../vendor/angular-ui-bootstrap/ui-bootstrap-custom-tpls-0.14.3.min.js';
 
 angular.module('archivesSpaceController', ['alertService', 'sipArrangeService', 'transferService', 'ui.bootstrap']).
@@ -584,5 +585,8 @@ controller('ArchivesSpaceEditController', ['$uibModalInstance', 'levels', 'level
   };
   vm.cancel = function() {
     $uibModalInstance.dismiss('cancel');
+  };
+  vm.validateDate = function(value) {
+    return !value || (/^\d{4}(-\d{2}(-\d{2})?)?$/.test(value) && moment(value, 'YYYY-MM-DD').isValid());
   };
 }]);
