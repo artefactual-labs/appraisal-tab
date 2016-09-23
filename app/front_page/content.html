@@ -55,6 +55,8 @@
       </form>
 
       <input class='btn btn-sm btn-default' type="button" value="Deselect all" ng-click="deselect()">
+      <input class='btn btn-sm btn-default' type="button" value="Collapse all" ng-click="collapse_all_nodes()">
+      <input class='btn btn-sm btn-default' type="button" value="Expand all" ng-click="expand_all_nodes()">
 
       <treecontrol class="tree-classic"
                    tree-model="transfers.data"
@@ -62,7 +64,8 @@
                    on-selection="track_selected(node, selected)"
                    selected-nodes="files.selected"
                    filter-expression="filter_expression"
-                   filter-comparator="filter_comparator">
+                   filter-comparator="filter_comparator"
+                   expanded-nodes="expanded_nodes">
         <span tree-draggable file-type="backlog" uuid="{{ node.id }}" ng-if="!node.not_draggable">
           {{ node.title }} <span class="tag" ng-repeat="tag in node.tags">{{ tag }}</span>
         </span>

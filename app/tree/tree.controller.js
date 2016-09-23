@@ -19,6 +19,7 @@ controller('TreeController', ['$scope', 'SelectedFiles', 'Transfer', function($s
       li: 'file',
     },
   };
+  $scope.expanded_nodes = [];
   // Hides objects with display set to "false"
   $scope.filter_expression = {display: true};
   $scope.filter_comparator = true;
@@ -72,5 +73,24 @@ controller('TreeController', ['$scope', 'SelectedFiles', 'Transfer', function($s
 
     Transfer.add_list_of_tags(SelectedFiles.list_file_ids(), tag);
     this.tag = '';
+  };
+
+  var expand_children = nodes => {
+    angular.forEach(nodes, node => {
+      if (node.type === 'transfer' || node.type === 'directory') {
+        $scope.expanded_nodes.push(node);
+        if (angular.isDefined(node.children) && node.children.length) {
+          expand_children(node.children);
+        }
+      }
+    });
+  };
+
+  $scope.collapse_all_nodes = function() {
+    $scope.expanded_nodes = [];
+  };
+
+  $scope.expand_all_nodes = function() {
+    expand_children(Transfer.data);
   };
 }]);
