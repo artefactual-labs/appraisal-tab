@@ -56,6 +56,15 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
     }
     delete copy.accessrestrict_note;
 
+    if (form.date_expression) {
+      copy.dates = form.date_expression;
+    } else if (form.start_date) {
+      copy.dates = copy.start_date;
+      if (form.end_date) {
+        copy.dates += ' - ' + copy.end_date;
+      }
+    }
+
     return copy;
   };
 
@@ -207,6 +216,13 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
         result.id = response.id;
         result.parent = node;
         result.type = 'resource_component';
+        result.display_title = result.title;
+        if (result.dates) {
+          if (result.title) {
+            result.display_title += ', '; 
+          }
+          result.display_title += result.dates; 
+        }
         append_child(node, result);
       };
 
