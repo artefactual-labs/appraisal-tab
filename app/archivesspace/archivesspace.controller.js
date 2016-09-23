@@ -97,7 +97,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
           return false;
         },
         date_expression: () => {
-          return node.date_expression;
+          return false;
         },
         note: () => {
           if (node.notes) {
