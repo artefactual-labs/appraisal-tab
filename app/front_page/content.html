@@ -49,8 +49,8 @@
 
       <div class='transfer-actions'>
         <input class='btn btn-sm btn-default' type="button" value="Deselect all" ng-click="deselect()" ng-disabled="files.selected.length < 1">
-        <input class='btn btn-sm btn-default' type="button" value="Collapse all" ng-click="collapse_all_nodes()">
-        <input class='btn btn-sm btn-default' type="button" value="Expand all" ng-click="expand_all_nodes()">
+        <input class='btn btn-sm btn-default' type="button" value="Collapse all" ng-click="transfers.collapse_all_nodes()">
+        <input class='btn btn-sm btn-default' type="button" value="Expand all" ng-click="transfers.expand_all_nodes()">
       </div>
     </div>
 
@@ -62,7 +62,7 @@
                    selected-nodes="files.selected"
                    filter-expression="filter_expression"
                    filter-comparator="filter_comparator"
-                   expanded-nodes="expanded_nodes">
+                   expanded-nodes="transfers.expanded_nodes">
         <span tree-draggable file-type="backlog" uuid="{{ node.id }}" ng-if="!node.not_draggable">
           {{ node.title }} <span class="tag" ng-repeat="tag in node.tags">{{ tag }}</span>
         </span>
