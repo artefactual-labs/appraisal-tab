@@ -105,6 +105,7 @@
       <div ng-if="vm.selected_files.selected.length > 0">
         <p><b><ng-pluralize count="(vm.selected_files.selected | filter: {'type': 'file'} | facet).length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> in list, <ng-pluralize count="vm.selected.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize> selected</p>
 
+        <!--
         <fieldset>
           <label for='start-date-facet'>Date range start</label>
           <input type="text"
@@ -122,6 +123,7 @@
                  ng-pattern="vm.date_regex"/>
         </fieldset>
         <span ng-if="vm.date_facet">Dates: {{ vm.date_facet }} <span ng-click="vm.reset_dates();"><i class="fa fa-times"></i></span></span>
+        -->
 
         <form ng-submit="vm.submit(vm.selected)">
           <input type="text"
