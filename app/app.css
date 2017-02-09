@@ -100,17 +100,13 @@ fieldset {
   background-color: #fff;
 }
 
-.aspace-panel form,
-.aspace-panel form input,
-.aspace-panel .aspace-actions,
-.aspace-panel .aspace-actions .btn,
-.transfer-panel form,
-.transfer-panel form input,
-.transfer-panel .transfer-actions,
-.transfer-panel .transfer-actions .btn {
+.panel-heading form,
+.panel-heading form input,
+.panel-heading .actions,
+.panel-heading .actions .btn {
   margin-top: 5px;
 }
 
-.transfer-panel .transfer-counts {
+.panel-heading .counts {
   float: right;
 }
