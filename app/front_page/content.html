@@ -136,6 +136,10 @@
                ng-disabled="vm.selected.length < 1"
                class='btn btn-sm btn-default'>
       </form>
+
+      <div class='actions' ng-if="vm.selected_files.selected.length > 0">
+        <input class='btn btn-sm btn-default' type="button" ng-value="vm.show_path ? 'Hide path' : 'Show path'" ng-click="vm.show_path = !vm.show_path">
+      </div>
     </div>
 
     <div class='panel-body'>
@@ -149,6 +153,7 @@
                    ng-click="vm.select_all()">
           </th>
           <th><a ng-click="vm.set_sort_property('title')">Filename</a></th>
+          <th ng-if="vm.show_path"><a ng-click="vm.set_sort_property('relative_path')">Path</a></th>
           <th><a ng-click="vm.set_sort_property('size')">Size</a></th>
           <th><a ng-click="vm.set_sort_property('last_modified')">Last modified</a></th>
           <th>Tags</th>
@@ -165,8 +170,9 @@
                  all-selected="vm.all_selected">
           </td>
           <td>
-            <a href="#{{ vm.$routeSegment.getSegmentUrl('preview', {id: file.id}) }}">{{ file.relative_path }}</a>
+            <a href="#{{ vm.$routeSegment.getSegmentUrl('preview', {id: file.id}) }}">{{ file.title }}</a>
           </td>
+          <td ng-if="vm.show_path">{{ file.relative_path }}</td>
           <td>{{ file.size | number}} MB</td>
           <td>{{ file.last_modified }}</td>
           <td>
