@@ -44,6 +44,7 @@ controller('FileListController', ['$scope', '$routeSegment', 'SelectedFiles', 'T
   // Sorting related
   vm.sort_property = 'title';
   vm.sort_reverse = false;
+  vm.show_path = false;
 
   vm.set_sort_property = property => {
     if (vm.sort_property === property) {

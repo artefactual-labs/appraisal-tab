@@ -40,14 +40,14 @@
     <div class='panel-heading'>
       Backlog
 
-      <span class="transfer-counts"><b><ng-pluralize count="(files.selected | filter:{'type': 'transfer'}).length" when="{'1': '1 transfer', 'other': '{} transfers'}"></ng-pluralize></b>, <ng-pluralize count="files.selected.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> selected</span>
+      <span class="counts"><b><ng-pluralize count="(files.selected | filter:{'type': 'transfer'}).length" when="{'1': '1 transfer', 'other': '{} transfers'}"></ng-pluralize></b>, <ng-pluralize count="files.selected.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> selected</span>
 
       <form ng-submit="submit()" class="form-inline">
         <input type="text" ng-model="tag" ng-disabled="files.selected.length < 1" class="form-control input-sm">
         <input type="submit" id="submit-tag" value="Add tag to selected files" ng-disabled="files.selected.length < 1" class='btn btn-sm btn-default'>
       </form>
 
-      <div class='transfer-actions'>
+      <div class='actions'>
         <input class='btn btn-sm btn-default' type="button" value="Deselect all" ng-click="deselect()" ng-disabled="files.selected.length < 1">
         <input class='btn btn-sm btn-default' type="button" value="Collapse all" ng-click="transfers.collapse_all_nodes()">
         <input class='btn btn-sm btn-default' type="button" value="Expand all" ng-click="transfers.expand_all_nodes()">
@@ -97,44 +97,53 @@
 </ui-minimize-panel>
 
 <ui-minimize-panel title="File list" open='false'>
-  <div class='panel panel-default'>
+  <div class='panel panel-default' ng-controller="FileListController as vm">
     <div class='panel-heading'>
       File List
+
+      <span class="counts" ng-if="vm.selected_files.selected.length > 0"><b><ng-pluralize count="(vm.selected_files.selected | filter: {'type': 'file'} | facet).length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> in list, <ng-pluralize count="vm.selected.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize> selected</span>
+
+      <span class="counts" ng-if="vm.selected_files.selected.length === 0">File list is empty.</span>
+
+      <!--
+      <fieldset>
+        <label for='start-date-facet'>Date range start</label>
+        <input type="text"
+               ng-model="vm.date_start"
+               class='form-control'
+               id='start-date-facet'
+               ng-change="vm.set_date_filter(vm.date_start, vm.date_end)"
+               ng-pattern="vm.date_regex"/>
+        <label for='end-date-facet'>Date range end</label>
+        <input type="text"
+               ng-model="vm.date_end"
+               class='form-control'
+               id='end-date-facet'
+               ng-change="vm.set_date_filter(vm.date_start, vm.date_end)"
+               ng-pattern="vm.date_regex"/>
+      </fieldset>
+      <span ng-if="vm.date_facet">Dates: {{ vm.date_facet }} <span ng-click="vm.reset_dates();"><i class="fa fa-times"></i></span></span>
+      -->
+
+      <form ng-if="vm.selected_files.selected.length > 0" ng-submit="vm.submit(vm.selected)" class="form-inline">
+        <input type="text"
+               class="form-control input-sm"
+               ng-model="vm.tag"
+               ng-disabled="vm.selected.length < 1">
+        <input type="submit"
+               id="submit-tag"
+               value="Add tag to selected files"
+               ng-disabled="vm.selected.length < 1"
+               class='btn btn-sm btn-default'>
+      </form>
+
+      <div class='actions' ng-if="vm.selected_files.selected.length > 0">
+        <input class='btn btn-sm btn-default' type="button" ng-value="vm.show_path ? 'Hide path' : 'Show path'" ng-click="vm.show_path = !vm.show_path">
+      </div>
     </div>
-    <div class='panel-body' ng-controller="FileListController as vm">
-      <div ng-if="vm.selected_files.selected.length > 0">
-        <p><b><ng-pluralize count="(vm.selected_files.selected | filter: {'type': 'file'} | facet).length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize></b> in list, <ng-pluralize count="vm.selected.length" when="{'1': '1 object', 'other': '{} objects'}"></ng-pluralize> selected</p>
 
-        <fieldset>
-          <label for='start-date-facet'>Date range start</label>
-          <input type="text"
-                 ng-model="vm.date_start"
-                 class='form-control'
-                 id='start-date-facet'
-                 ng-change="vm.set_date_filter(vm.date_start, vm.date_end)"
-                 ng-pattern="vm.date_regex"/>
-          <label for='end-date-facet'>Date range end</label>
-          <input type="text"
-                 ng-model="vm.date_end"
-                 class='form-control'
-                 id='end-date-facet'
-                 ng-change="vm.set_date_filter(vm.date_start, vm.date_end)"
-                 ng-pattern="vm.date_regex"/>
-        </fieldset>
-        <span ng-if="vm.date_facet">Dates: {{ vm.date_facet }} <span ng-click="vm.reset_dates();"><i class="fa fa-times"></i></span></span>
-
-        <form ng-submit="vm.submit(vm.selected)">
-          <input type="text"
-                 ng-model="vm.tag"
-                 ng-disabled="vm.selected.length < 1">
-          <input type="submit"
-                 id="submit-tag"
-                 value="Add tag to selected files"
-                 ng-disabled="vm.selected.length < 1"
-                 class='btn btn-sm btn-default'>
-        </form>
-
-        <table class='table table-striped table-hover table-condensed'>
+    <div class='panel-body'>
+      <table ng-if="vm.selected_files.selected.length > 0" class='table table-striped table-hover table-condensed'>
         <tr>
           <th>
             <input type="checkbox"
@@ -144,6 +153,7 @@
                    ng-click="vm.select_all()">
           </th>
           <th><a ng-click="vm.set_sort_property('title')">Filename</a></th>
+          <th ng-if="vm.show_path"><a ng-click="vm.set_sort_property('relative_path')">Path</a></th>
           <th><a ng-click="vm.set_sort_property('size')">Size</a></th>
           <th><a ng-click="vm.set_sort_property('last_modified')">Last modified</a></th>
           <th>Tags</th>
@@ -160,17 +170,16 @@
                  all-selected="vm.all_selected">
           </td>
           <td>
-            <a href="#{{ vm.$routeSegment.getSegmentUrl('preview', {id: file.id}) }}">{{ file.relative_path }}</a>
+            <a href="#{{ vm.$routeSegment.getSegmentUrl('preview', {id: file.id}) }}">{{ file.title }}</a>
           </td>
+          <td ng-if="vm.show_path">{{ file.relative_path }}</td>
           <td>{{ file.size | number}} MB</td>
           <td>{{ file.last_modified }}</td>
           <td>
             <span class="tag" ng-repeat="tag in file.tags">{{ tag }} <span ng-click="vm.remove_tag(file.id, tag)"><i class="fa fa-minus-square"></i></span></span>
           </td>
         </tr>
-        </table>
-      </div>
-      <p ng-if="vm.selected_files.selected.length === 0">File list is empty.</p>
+      </table>
     </div>
   </div>
 </ui-minimize-panel>
@@ -186,7 +195,7 @@
         <input type="submit" class='btn btn-sm btn-primary' id="archivesspace_search" value="Search ArchivesSpace"/>
       </form>
 
-      <div class="aspace-actions">
+      <div class="actions">
         <input type='button'
                class='btn btn-primary btn-sm'
                id='add_child_record'
