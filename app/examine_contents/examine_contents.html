@@ -43,6 +43,7 @@
                ng-click="vm.select_all((vm.SelectedFiles.selected | find_files | filter:{bulk_extractor_reports: vm.type}))">
       </th>
       <th>Filename</th>
+      <th>Transfer name</th>
       <th>Preview</th>
       <th>Bulk Extractor Logs</th>
     </tr>
@@ -59,6 +60,9 @@
       </td>
       <td>
         <a href="#{{ vm.$routeSegment.getSegmentUrl('examine_contents.file_info', {id: record.id, type: vm.type}) }}">{{ vm.cutRelativePath(record.relative_path) }}</a>
+      </td>
+      <td>
+        {{ record.relative_path | limitTo:record.relative_path.indexOf('/') }}
       </td>
       <td>
         <a href="#{{ vm.$routeSegment.getSegmentUrl('preview', {id: record.id}) }}">Preview</a>
