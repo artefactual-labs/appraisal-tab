@@ -222,9 +222,9 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
         result.display_title = result.title;
         if (result.dates) {
           if (result.title) {
-            result.display_title += ', '; 
+            result.display_title += ', ';
           }
-          result.display_title += result.dates; 
+          result.display_title += result.dates;
         }
         append_child(node, result);
       };
@@ -554,7 +554,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
       node.request_pending = false;
       Alert.alerts.push({
         type: 'success',
-        message: `Successfully started SIP from record "${node.title}"`,
+        message: `Successfully started SIP from record "${node.display_title}"`,
       });
 
       // Remove the digital object components so the user doesn't try to add new items
@@ -565,7 +565,7 @@ controller('ArchivesSpaceController', ['$scope', '$uibModal', 'Alert', 'Archives
       var message;
       // error.message won't be defined if this returned an HTML 500
       if (error.data.message && error.data.message.startsWith('No SIP Arrange')) {
-        message = `Unable to start SIP; no files arranged into record "${node.title}".`;
+        message = `Unable to start SIP; no files arranged into record "${node.display_title}".`;
       } else {
         message = 'Unable to start SIP; check dashboard logs.';
       }

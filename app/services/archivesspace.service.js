@@ -86,7 +86,7 @@ factory('ArchivesSpace', ['Restangular', function(Restangular) {
       // as a directory within the new SIP.
       start_sip: function(node) {
         var url_fragment = id_to_urlsafe(node.id);
-        return ArchivesSpace.one(url_fragment).one('copy_from_arrange').customPOST({ sip_name: node.title });
+        return ArchivesSpace.one(url_fragment).one('copy_from_arrange').customPOST({ sip_name: node.display_title });
       },
     };
 }]);
